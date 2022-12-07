@@ -55,6 +55,7 @@ int main(){
 
     int result = part2(text);
 
-    std::cout << "Result: " << result << std::endl;
+    //std::cout << "Result: " << result << std::endl;
+    printf("Result: %d\n\n", result);
     return 0;
 }

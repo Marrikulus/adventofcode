@@ -108,7 +108,7 @@ char *part1(char*input){
 
     while(line = arrpop(stackLines))
     {
-        for(int i=0,j=0;i < len; i+=4, j++){
+        for(int i=0,j=0; i < len; i+=4, j++){
             char c = line[i+1];
             if(c != ' '){
                 arrput(stacks[j], c);
@@ -177,7 +177,6 @@ char *part2(char*input){
     int it = 0;
     while((line = strsep(&_at, "\n")) != NULL)
     {
-        //printf("Inst: %s\n", line);
         Inst inst = parseInstruction(line);
         char *from = stacks[inst.from-1];
         char *to = stacks[inst.to-1];
@@ -188,29 +187,15 @@ char *part2(char*input){
         {
             int idx = len - inst.count + it;
             c = from[idx];
-            //printf("%d: %d moving %c from %d to %d\n", it, idx, c, inst.from, inst.to);
             arrput(to, c);
             it++;
         }
+
         while(it--){
-            //printf("do popping %d\n", it);
             c = arrpop(from);
-            //printf("%d popping %c from %d \n", it, c, inst.from);
         }
 
-        //printf("it: %d\n", it);
         assert(it == -1);
-
-/*
-        char *stack;
-        for(int i = 0, end = 9;i < end; i++)
-        {
-            printf("%d: %s", i+1, stack);
-            for(int j = 0, end = arrlen(stack);j < end; j++)
-                printf("%c", stack[j]);
-            printf("\n");
-        }
-*/
     }
 
 

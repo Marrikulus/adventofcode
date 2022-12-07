@@ -63,12 +63,31 @@ enum Result
     WIN,
 };
 
+int cal_win(elf, me){
+    return ( elf < me //this takes care of most cases
+                // these are needed because of wrapping 
+            || (elf == SCISSOR && me == ROCK)// I should also win in this case
+        ) && !(elf == ROCK && me == SCISSOR) // but not win not in the reverse case
+}
+
+int cal_win2(elf, me){
+    return ( elf < me //this takes care of most cases
+                // these are needed because of wrapping 
+            || (elf == SCISSOR && me == ROCK)// I should also win in this case
+        ) && !(elf == ROCK && me == SCISSOR) // but not win not in the reverse case
+}
+
 int calc_score(elf, me){
     int score = 0;
     score += me;
     if(elf == me){ //draw
         score += 3;
-    } else if(( elf < me || (elf == 3 && me == 1)) && !(elf == 1 && me == 3)){ //win
+    } else if(
+        ( elf < me //this takes care of most cases
+                // these are needed because of wrapping 
+            || (elf == SCISSOR && me == ROCK)// I should also win in this case
+        ) && !(elf == ROCK && me == SCISSOR) // but not win not in the reverse case
+    ){ //win
         score += 6;
     }
     return score;
